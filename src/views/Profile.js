@@ -8,7 +8,7 @@ export default class Profile extends Component {
     super(props);
     this.state = {
       auth: "",
-      uid: "",
+      id: "",
       avatar: "",
       name: "",
       email: "",
@@ -16,12 +16,12 @@ export default class Profile extends Component {
     this.Get();
   }
 
-  Get() {
+  Get = () => {
     axios
       .get("http://127.0.0.1:4523/m1/1221635-0-default/user/1")
       .then((response) => {
         this.setState({
-          uid: response.data.data.id,
+          id: response.data.data.id,
           name: response.data.data.name,
           email: response.data.data.email,
           avatar: response.data.data.avatar,
@@ -32,7 +32,7 @@ export default class Profile extends Component {
         // handle error satuation
         console.log(error);
       });
-  }
+  };
 
   render() {
     return (
@@ -50,7 +50,7 @@ export default class Profile extends Component {
             <Avatar alt="Avatar" src={this.state.avatar} sx={{ width: 112, height: 112 }} />
           </Stack>
           <Stack> 用户名: {this.state.name}</Stack>
-          <Stack> 用户ID: {this.state.uid}</Stack>
+          <Stack> 用户ID: {this.state.id}</Stack>
           <Stack> Email: {this.state.email}</Stack>
           <Stack> 用户权限: {this.state.auth}</Stack>
         </Stack>

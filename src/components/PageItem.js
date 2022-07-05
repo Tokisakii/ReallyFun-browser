@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Grid } from "@mui/material";
+import { Stack, CardActionArea, Grid, Divider } from "@mui/material";
 import Reating2show from "./Rating2show";
 
 export default class PageItem extends React.Component {
@@ -12,24 +12,56 @@ export default class PageItem extends React.Component {
     return (
       <Grid container sx={{ mt: 12 }}>
         {games.map((gamesObj) => (
-          <Card sx={{ maxWidth: 200 }}>
+          <Grid
+            item
+            xs={6}
+            sx={{
+              height: 0.5,
+            }}
+          >
             <CardActionArea onClick={() => console.log("handleInfor")}>
-              <CardMedia component="img" height="200" image={gamesObj.thumb} alt="logo" />
-              <CardContent>
-                <Typography gutterBottom variant="button" component="div">
-                  {gamesObj.title}
-                </Typography>
-                <Typography
-                  variant="body4"
-                  color="text.secondary"
-                  sx={{ textOverflow: "ellipsis" }}
-                >
-                  {gamesObj.intro}
-                </Typography>
-                <Reating2show value={gamesObj.rating} />
-              </CardContent>
+              <Card sx={{ maxWidth: "md" }}>
+                <Stack direction="row">
+                  <CardMedia
+                    component="img"
+                    image={gamesObj.thumb}
+                    alt="logo"
+                    sx={{
+                      width: 0.2,
+                    }}
+                  />
+                  <CardContent
+                    sx={{
+                      width: 0.8,
+                    }}
+                  >
+                    <Stack direction="column" item>
+                      <Typography gutterBottom variant="h6" component="div">
+                        {gamesObj.title}
+                      </Typography>
+                      <Typography
+                        variant="body4"
+                        color="text.secondary"
+                        component="div"
+                        sx={{
+                          textOverflow: "ellipsis",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {gamesObj.intro}
+                      </Typography>
+                      <Stack direction="row">
+                        <Reating2show value={gamesObj.rating / 2} />
+                        <Typography variant="body5" color="text.secondary">
+                          {gamesObj.rating}
+                        </Typography>
+                      </Stack>
+                    </Stack>
+                  </CardContent>
+                </Stack>
+              </Card>
             </CardActionArea>
-          </Card>
+          </Grid>
         ))}
       </Grid>
     );

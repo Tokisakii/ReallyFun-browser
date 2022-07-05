@@ -16,8 +16,6 @@ import Upload from "./views/Upload";
 const cookies = new Cookies();
 
 function App() {
-  // console.log("APP!!!");
-
   const navigate = useNavigate();
 
   const initUid = cookies.get("uid");
@@ -43,7 +41,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/collection" element={<Collection />} />
         <Route path="/upload" element={<Upload />} />
-        {/* <Route path="/login" element={<Login navigate={navigate} onLogin={handleLogin} />} /> */}
         <Route path="/login" element={<LogIn navigate={navigate} onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
       </Routes>

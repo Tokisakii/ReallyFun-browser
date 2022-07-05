@@ -74,10 +74,6 @@ class LogIn extends React.Component {
                 value={this.state.passwd}
                 onChange={(ev) => this.setState({ passwd: ev.target.value })}
               />
-              {/* <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
               <Button
                 type="submit"
                 fullWidth

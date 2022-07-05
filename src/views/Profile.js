@@ -3,8 +3,11 @@ import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import ProfileCard from "../components/ProfileCard";
+import GameCard from "../components/GameCard";
 
 export default class Profile extends Component {
+  uid = this.props.uid;
+
   render() {
     return (
       <Container sx={{ mt: 12, border: 1 }} component="main" maxWidth="md">
@@ -12,10 +15,14 @@ export default class Profile extends Component {
           个人空间
         </Typography>
         <Stack direction="row" spacing={2} sx={{ border: 1 }}>
-          <ProfileCard />
+          <ProfileCard uid={this.uid} />
           <Stack xs={6} sx={{ border: 1 }}>
-            <Stack>我的收藏</Stack>
-            <Stack>我的上传</Stack>
+            <Typography component="div" variant="h3">
+              我的收藏
+            </Typography>
+            <Typography component="div" variant="h3">
+              我的上传
+            </Typography>
           </Stack>
         </Stack>
       </Container>

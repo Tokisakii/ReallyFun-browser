@@ -20,7 +20,7 @@ import axios from "axios";
 const drawerWidth = 200;
 
 export default class ClippedDrawer extends React.Component {
-  handlegame = () => {
+  handlegame() {
     axios
       .get(
         "http://127.0.0.1:4523/m1/1221635-0-default/games?key=&order=&search=&tag_id=2&withtag=1&page_size=&page_num="
@@ -34,7 +34,7 @@ export default class ClippedDrawer extends React.Component {
           console.log("fail", error);
         }
       );
-  };
+  }
 
   render() {
     return (

@@ -27,9 +27,9 @@ export default class ProfileCard extends Component {
     this.Get();
   }
 
-  Get = () => {
+  Get() {
     axios
-      .get(`http://127.0.0.1:4523/m1/1221635-0-default/user/${cookies.get("uid")}`)
+      .get(`http://127.0.0.1:4523/m1/1221635-0-default/user/${this.props.uid}`)
       .then((response) => {
         this.setState({
           id: response.data.data.id,
@@ -43,29 +43,29 @@ export default class ProfileCard extends Component {
         // handle error satuation
         console.log(error);
       });
-  };
+  }
 
-  handleChange = () => {
+  handleChange() {
     const temp = this.state.Readonly;
     this.setState({ Readonly: !temp });
-  };
+  }
 
-  handleName = (e) => {
+  handleName(e) {
     this.setState({ name: e.target.value });
-  };
+  }
 
-  handleEmail = (e) => {
+  handleEmail(e) {
     this.setState({ email: e.target.value });
-  };
+  }
 
   handleAuth = (e) => {
     this.setState({ auth: e.target.value });
   };
 
-  handleSubmit = () => {
+  handleSubmit() {
     this.setState({ Readonly: true });
     console.log(this.state);
-  };
+  }
 
   render() {
     return (

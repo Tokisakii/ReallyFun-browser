@@ -38,7 +38,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/recommend" element={<Recommend />} />
         <Route path="/latest" element={<Latest />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile uid={uid} />} />
         <Route path="/collection" element={<Collection />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/login" element={<LogIn navigate={navigate} onLogin={handleLogin} />} />

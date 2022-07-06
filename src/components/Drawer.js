@@ -16,24 +16,21 @@ import ChildCareIcon from "@mui/icons-material/ChildCare";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import CasinoIcon from "@mui/icons-material/Casino";
 import axios from "axios";
+import Api from "../utils/Api";
 
 const drawerWidth = 200;
 
 export default class ClippedDrawer extends React.Component {
   handlegame() {
-    axios
-      .get(
-        "http://127.0.0.1:4523/m1/1221635-0-default/games?key=&order=&search=&tag_id=2&withtag=1&page_size=&page_num="
-      )
-      .then(
-        (response) => {
-          this.props.onSaveGames(response.data.data);
-          console.log(response.data.data);
-        },
-        (error) => {
-          console.log("fail", error);
-        }
-      );
+    axios.get(Api(`/games?key=&order=&search=&tag_id=2&withtag=1&page_size=&page_num=`)).then(
+      (response) => {
+        this.props.onSaveGames(response.data.data);
+        console.log(response.data.data);
+      },
+      (error) => {
+        console.log("fail", error);
+      }
+    );
   }
 
   render() {

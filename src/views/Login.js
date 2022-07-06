@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import History from "../components/History";
+import Api from "../utils/Api";
 
 const theme = createTheme();
 
@@ -26,12 +27,12 @@ class LogIn extends React.Component {
 
   handleLogin() {
     axios
-      .post("http://127.0.0.1:4523/m1/1221635-0-default/user/login", {
+      .post(Api(`/user/login`), {
         name: this.state.uid,
         password: this.state.passwd,
       })
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);

@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "@mui/material/Container";
 import ClippedDrawer from "../components/Drawer";
-import PageItem from "../components/PageItem";
+import GameList from "../components/GameList";
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class Home extends React.Component {
     return (
       <Container component="main" maxWidth="md">
         <ClippedDrawer onSaveGames={(value) => this.handleSaveGames(value)} />
-        <PageItem games={games} />
+        <GameList games={games} />
       </Container>
     );
   }

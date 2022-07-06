@@ -9,6 +9,7 @@ import Register from "./views/Register";
 import Home from "./views/Home";
 import Latest from "./views/Latest";
 import Collection from "./views/Collection";
+import History from "./views/History";
 import Profile from "./views/Profile";
 import Recommend from "./views/Recommend";
 import Upload from "./views/Upload";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/latest" element={<Latest />} />
         <Route path="/profile" element={<Profile uid={uid} />} />
         <Route path="/collection" element={<Collection />} />
+        <Route path="/history" element={<History />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/login" element={<LogIn navigate={navigate} onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />

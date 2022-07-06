@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import Cookies from "universal-cookie";
 import { Container } from "@mui/material";
 import axios from "axios";
 import Api from "../utils/Api";
 import GameList from "../components/GameList";
 
-export default class Latest extends Component {
+const cookies = new Cookies();
+
+export default class History extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,12 +17,13 @@ export default class Latest extends Component {
 
   componentDidMount() {
     axios
-      .get(Api(`/games`), {
-        key: "time",
+      .get(Api(`/histories`), {
+        user_id: cookies.get("uid"),
       })
       .then(
         (response) => {
           this.setState({ games: response.data.data });
+          console.log(response.data.data.game_info);
           console.log(this.state.games);
         },
         (error) => {

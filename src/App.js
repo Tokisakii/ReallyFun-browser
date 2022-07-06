@@ -8,9 +8,9 @@ import LogIn from "./views/Login";
 import Register from "./views/Register";
 import Home from "./views/Home";
 import Latest from "./views/Latest";
-import Recommend from "./views/Recommend";
-import Profile from "./views/Profile";
 import Collection from "./views/Collection";
+import Profile from "./views/Profile";
+import Recommend from "./views/Recommend";
 import Upload from "./views/Upload";
 
 const cookies = new Cookies();

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Card from "@mui/material/Card";
-import { styled } from "@mui/material/styles";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -9,18 +8,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import FormHelperText from "@mui/material/FormHelperText";
-import { Alert, Grid, Stack } from "@mui/material";
+import { Alert } from "@mui/material";
 import AlertTitle from "@mui/material/AlertTitle";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import axios from "axios";
-import Cookies from "universal-cookie";
-
-const Input = styled("input")({
-  display: "none",
-});
-
-const cookies = new Cookies();
 
 export default class ProfileCard extends Component {
   constructor(props) {

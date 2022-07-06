@@ -10,7 +10,7 @@ export default class Profile extends Component {
 
   render() {
     return (
-      <Container sx={{ mt: 12, border: 1 }} component="main" maxWidth="md">
+      <Container sx={{ mt: 12 }} component="main" maxWidth="md">
         <Typography component="div" variant="h3">
           个人空间
         </Typography>

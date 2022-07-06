@@ -31,7 +31,7 @@ class LogIn extends React.Component {
         password: this.state.passwd,
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error);

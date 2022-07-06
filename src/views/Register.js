@@ -10,6 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
 import History from "../components/History";
 
 const theme = createTheme();
@@ -18,22 +19,35 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      uid: "",
+      id: "",
       email: "",
       passwd: "",
     };
   }
 
-  async handleRegister() {
+  handleRegister() {
+    const data = {
+      name: this.state.id,
+      password: this.state.passwd,
+      email: this.state.email,
+    };
+    axios
+      .post("http://127.0.0.1:4523/m1/1221635-0-default/user/register", data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     console.log("handleRegister", this.state.uid, this.state.email, this.state.passwd);
-    History.replace({ pathname: "/signin", state: {} });
-    History.go(0);
+    // History.replace({ pathname: "/login", state: {} });
+    // History.go(0);
   }
 
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" sx={{ mt: 12 }}>
           <CssBaseline />
           <Box
             sx={{
@@ -61,8 +75,8 @@ class Register extends React.Component {
                     name="name"
                     autoComplete="name"
                     autoFocus
-                    value={this.state.uid}
-                    onChange={(ev) => this.setState({ uid: ev.target.value })}
+                    value={this.state.id}
+                    onChange={(e) => this.setState({ id: e.target.value })}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -74,7 +88,7 @@ class Register extends React.Component {
                     name="email"
                     autoComplete="email"
                     value={this.state.email}
-                    onChange={(ev) => this.setState({ email: ev.target.value })}
+                    onChange={(e) => this.setState({ email: e.target.value })}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -88,7 +102,7 @@ class Register extends React.Component {
                     id="password"
                     autoComplete="current-password"
                     value={this.state.passwd}
-                    onChange={(ev) => this.setState({ passwd: ev.target.value })}
+                    onChange={(e) => this.setState({ passwd: e.target.value })}
                   />
                 </Grid>
               </Grid>

@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { Stack, CardActionArea, Grid } from "@mui/material";
 import Reating2show from "./Rating2show";
 
-export default class PageItem extends React.Component {
+export default class GameList extends React.Component {
   render() {
     const { games } = this.props;
     return (

@@ -27,10 +27,9 @@ export default class ProfileCard extends Component {
       avatar: "",
       auth: "",
     };
-    this.Get();
   }
 
-  Get() {
+  componentDidMount() {
     axios
       .get(Api(`/user/${this.props.uid}`))
       .then((response) => {

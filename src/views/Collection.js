@@ -1,28 +1,28 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
-import { Stack, CardActionArea, Grid } from "@mui/material";
+import { Container } from "@mui/material";
 import axios from "axios";
 import Api from "../utils/Api";
+import GameList from "../components/GameList";
 
 const cookies = new Cookies();
 
-export default class Recommend extends Component {
+export default class Collection extends Component {
   constructor(props) {
     super(props);
     this.state = {
       games: [],
     };
-    this.handleGetRecommendGameList();
   }
 
-  handleGetRecommendGameList() {
+  componentDidMount() {
     axios
       .get(Api(`/favorites`), {
         user_id: cookies.get("uid"),
       })
       .then(
         (response) => {
-          this.setState(response.data);
+          this.setState({ games: response.data.data });
           console.log(this.state.games);
         },
         (error) => {
@@ -33,9 +33,9 @@ export default class Recommend extends Component {
 
   render() {
     return (
-      <Grid container sx={{ mt: 12 }}>
-        {this.state.games}
-      </Grid>
+      <Container component="main" maxWidth="md">
+        <GameList games={this.state.games} />
+      </Container>
     );
   }
 }

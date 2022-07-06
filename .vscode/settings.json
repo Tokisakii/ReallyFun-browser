@@ -9,5 +9,6 @@
         "source.fixAll.eslint": true
     },
     "eslint.format.enable": true,
-    "eslint.alwaysShowStatus": true
+    "eslint.alwaysShowStatus": true,
+    "editor.tabSize": 2
 }

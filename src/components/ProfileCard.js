@@ -13,6 +13,7 @@ import AlertTitle from "@mui/material/AlertTitle";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import axios from "axios";
+import Api from "../utils/Api";
 
 export default class ProfileCard extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ export default class ProfileCard extends Component {
 
   Get() {
     axios
-      .get(`http://127.0.0.1:4523/m1/1221635-0-default/user/${this.props.uid}`)
+      .get(Api(`/user/${this.props.uid}`))
       .then((response) => {
         this.setState({
           id: response.data.data.id,
@@ -78,7 +79,7 @@ export default class ProfileCard extends Component {
 
   handleUploadAvatar() {
     axios
-      .post("http://127.0.0.1:4523/m1/1221635-0-default/user/avatar", {
+      .post(Api(`/user/avatar`), {
         avatar: this.state.avatar,
       })
       .then((response) => {
@@ -95,12 +96,11 @@ export default class ProfileCard extends Component {
   handleSubmit() {
     this.handleUploadAvatar();
     this.setState({ Readonly: true });
-    console.log(this.state);
   }
 
   handleDelete() {
     axios
-      .patch("http://127.0.0.1:4523/m1/1221635-0-default/user/name", {
+      .patch(Api(`/user/name`), {
         name: this.state.uid,
       })
       .then((response) => {

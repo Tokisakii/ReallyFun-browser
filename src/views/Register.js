@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import History from "../components/History";
+import Api from "../utils/Api";
 
 const theme = createTheme();
 
@@ -27,13 +28,13 @@ class Register extends React.Component {
 
   handleRegister() {
     axios
-      .post("http://127.0.0.1:4523/m1/1221635-0-default/user/register", {
+      .post(Api(`/user/register`), {
         name: this.state.id,
         password: this.state.passwd,
         email: this.state.email,
       })
       .then((response) => {
-        console.log(response.code);
+        console.log(response.message);
       })
       .catch((error) => {
         console.log(error);

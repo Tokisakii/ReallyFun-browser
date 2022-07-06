@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Cookies from "universal-cookie";
 import { Stack, CardActionArea, Grid } from "@mui/material";
 import axios from "axios";
+import Api from "../utils/Api";
 
 const cookies = new Cookies();
 
@@ -16,7 +17,7 @@ export default class Recommend extends Component {
 
   handleGetRecommendGameList() {
     axios
-      .get("http://127.0.0.1:4523/m1/1221635-0-default/favorites", {
+      .get(Api(`/favorites`), {
         user_id: cookies.get("uid"),
       })
       .then(

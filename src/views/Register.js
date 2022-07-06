@@ -10,6 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
 import History from "../components/History";
 
 const theme = createTheme();
@@ -18,22 +19,34 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      uid: "",
+      id: "",
       email: "",
       passwd: "",
     };
   }
 
-  async handleRegister() {
-    console.log("handleRegister", this.state.uid, this.state.email, this.state.passwd);
-    History.replace({ pathname: "/signin", state: {} });
+  handleRegister() {
+    axios
+      .post("http://127.0.0.1:4523/m1/1221635-0-default/user/register", {
+        name: this.state.id,
+        password: this.state.passwd,
+        email: this.state.email,
+      })
+      .then((response) => {
+        console.log(response.code);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log("handleRegister", this.state.id, this.state.email, this.state.passwd);
+    History.replace({ pathname: "/login", state: {} });
     History.go(0);
   }
 
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" sx={{ mt: 12 }}>
           <CssBaseline />
           <Box
             sx={{
@@ -49,7 +62,7 @@ class Register extends React.Component {
             <Typography component="h1" variant="h5">
               注册
             </Typography>
-            <Box component="form" noValidate onSubmit={this.handleRegister} sx={{ mt: 3 }}>
+            <Box component="form" noValidate sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
@@ -61,8 +74,8 @@ class Register extends React.Component {
                     name="name"
                     autoComplete="name"
                     autoFocus
-                    value={this.state.uid}
-                    onChange={(ev) => this.setState({ uid: ev.target.value })}
+                    value={this.state.id}
+                    onChange={(ev) => this.setState({ id: ev.target.value })}
                   />
                 </Grid>
                 <Grid item xs={12}>

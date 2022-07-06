@@ -10,6 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
 import History from "../components/History";
 
 const theme = createTheme();
@@ -23,7 +24,18 @@ class LogIn extends React.Component {
     };
   }
 
-  async handleLogin() {
+  handleLogin() {
+    axios
+      .post("http://127.0.0.1:4523/m1/1221635-0-default/user/login", {
+        name: this.state.uid,
+        password: this.state.passwd,
+      })
+      .then((response) => {
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     console.log("handleLogin", this.state.uid, this.state.passwd);
     this.props.onLogin(this.state.uid);
     History.replace({ pathname: "/", state: {} });
@@ -33,7 +45,7 @@ class LogIn extends React.Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" sx={{ mt: 12 }}>
           <CssBaseline />
           <Box
             sx={{
@@ -49,7 +61,7 @@ class LogIn extends React.Component {
             <Typography component="h1" variant="h5">
               登录
             </Typography>
-            <Box component="form" onSubmit={this.handleLogin} noValidate sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -74,10 +86,6 @@ class LogIn extends React.Component {
                 value={this.state.passwd}
                 onChange={(ev) => this.setState({ passwd: ev.target.value })}
               />
-              {/* <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              /> */}
               <Button
                 type="submit"
                 fullWidth

@@ -8,16 +8,14 @@ import LogIn from "./views/Login";
 import Register from "./views/Register";
 import Home from "./views/Home";
 import Latest from "./views/Latest";
-import Recommend from "./views/Recommend";
-import Profile from "./views/Profile";
 import Collection from "./views/Collection";
+import Profile from "./views/Profile";
+import Recommend from "./views/Recommend";
 import Upload from "./views/Upload";
 
 const cookies = new Cookies();
 
 function App() {
-  // console.log("APP!!!");
-
   const navigate = useNavigate();
 
   const initUid = cookies.get("uid");
@@ -40,10 +38,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/recommend" element={<Recommend />} />
         <Route path="/latest" element={<Latest />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile uid={uid} />} />
         <Route path="/collection" element={<Collection />} />
         <Route path="/upload" element={<Upload />} />
-        {/* <Route path="/login" element={<Login navigate={navigate} onLogin={handleLogin} />} /> */}
         <Route path="/login" element={<LogIn navigate={navigate} onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
       </Routes>

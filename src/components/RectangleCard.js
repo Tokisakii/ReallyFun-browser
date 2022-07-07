@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Stack, CardActionArea, Grid } from "@mui/material";
 import Reating2show from "./Rating2show";
 
-export default class GameList extends React.Component {
+export default class RectangleCard extends React.Component {
   render() {
     const { gamesObj } = this.props;
     return (

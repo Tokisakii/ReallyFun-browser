@@ -18,7 +18,6 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import History from "./History";
-import GameList from "./GameList";
 
 const pages = [
   { label: "首页", to: "/" },

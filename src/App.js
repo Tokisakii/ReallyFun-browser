@@ -14,7 +14,7 @@ import Profile from "./views/Profile";
 import Recommend from "./views/Recommend";
 import Upload from "./views/Upload";
 import Searchpage from "./views/Searchpage";
-import GameList from "./components/GameList";
+// import GameList from "./components/GameList";
 
 const cookies = new Cookies();
 
@@ -62,7 +62,7 @@ function App() {
         <Route path="/upload" element={<Upload />} />
         <Route path="/login" element={<LogIn navigate={navigate} onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/GameList" element={<GameList />} />
+        {/* <Route path="/GameList" element={<GameList />} /> */}
         <Route path="/searchPage" element={<Searchpage />} />
       </Routes>
     </Box>

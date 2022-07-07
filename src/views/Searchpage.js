@@ -1,7 +1,14 @@
 import React, { Component } from "react";
+import Container from "@mui/material/Container";
+import GameList from "../components/GameList";
 
 export default class Searchpage extends Component {
+  // const =
   render() {
-    return <div>搜索结果</div>;
+    return (
+      <Container component="main" maxWidth="md">
+        {/* <GameList games={games} /> */}
+      </Container>
+    );
   }
 }

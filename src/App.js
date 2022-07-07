@@ -13,14 +13,24 @@ import History from "./views/History";
 import Profile from "./views/Profile";
 import Recommend from "./views/Recommend";
 import Upload from "./views/Upload";
+import Searchpage from "./views/Searchpage";
+import GameList from "./components/GameList";
 
 const cookies = new Cookies();
+
+const MyContext = React.createContext();
+// const { Provider } = MyContext;
 
 function App() {
   const navigate = useNavigate();
 
   const initUid = cookies.get("uid");
   const [uid, setUid] = React.useState(initUid || null);
+  const [search, setSearch] = React.useState(null);
+
+  const handleSearch = (newSearch) => {
+    setSearch(newSearch);
+  };
 
   const handleLogin = (newUid) => {
     setUid(newUid);
@@ -34,9 +44,16 @@ function App() {
 
   return (
     <Box sx={{ height: 1 }}>
-      <NavBar navigate={navigate} uid={uid} onLogout={handleLogout} />
+      <NavBar navigate={navigate} uid={uid} onLogout={handleLogout} onSearch={handleSearch} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <MyContext.Provider value={search}>
+              <Home />
+            </MyContext.Provider>
+          }
+        />
         <Route path="/recommend" element={<Recommend />} />
         <Route path="/latest" element={<Latest />} />
         <Route path="/profile" element={<Profile uid={uid} />} />
@@ -45,6 +62,8 @@ function App() {
         <Route path="/upload" element={<Upload />} />
         <Route path="/login" element={<LogIn navigate={navigate} onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/GameList" element={<GameList />} />
+        <Route path="/searchPage" element={<Searchpage />} />
       </Routes>
     </Box>
   );

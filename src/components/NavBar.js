@@ -13,8 +13,12 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import ForumIcon from "@mui/icons-material/Forum";
-import Searchbar from "./Searchbar";
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+import axios from "axios";
 import History from "./History";
+import GameList from "./GameList";
 
 const pages = [
   { label: "首页", to: "/" },
@@ -28,14 +32,118 @@ const settings = [
   { label: "上传游戏", to: "/upload" },
 ];
 
+// const inputKeyUp = (e) => {
+//   if (e.keyCode === 13) {
+//     // alert(e.target.value);
+//     console.log(e.target.value);
+//   }
+// };
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
+
+// function Searchbar({ search, onSearch }) {
+//   return (
+//     <Search onKeyUp={inputKeyUp}>
+//       <SearchIconWrapper>
+//         <SearchIcon />
+//       </SearchIconWrapper>
+//       <StyledInputBase
+//         // value={search}
+//         // onChange={onSearch}
+//         placeholder="发现更多…"
+//         inputProps={{ "aria-label": "search" }}
+//       />
+//     </Search>
+//     // <div>{console.log(myRef.current.value)}</div>
+//   );
+// }
+
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       anchorElNav: null,
       anchorElUser: null,
+      searchGame: null,
+      searchResult: [],
     };
   }
+  // handleSearch(value) {
+  //   this.setState({ searchGame: value });
+  // }
+
+  searchRequest() {
+    this.props.onSearch(this.state.searchGame);
+  }
+
+  inputKeyUp = (e) => {
+    if (e.keyCode === 13) {
+      console.log(e.target.value);
+      // History.replace({ pathname: "/searchPage", state: {} });
+      // History.go(0);
+      this.setState({ searchGame: e.target.value });
+      this.searchRequest();
+      console.log(this.state);
+      axios
+        .get(
+          "http://127.0.0.1:4523/m1/1221635-0-default/games?key=&order=&search=&tag_id=2&withtag=1&page_size=&page_num="
+        )
+        .then(
+          (response) => {
+            this.setState({ searchResult: response.data });
+            console.log(response.data);
+          },
+          (error) => {
+            console.log("fail", error);
+          }
+        );
+      const { games } = this.state.searchResult;
+      // return (
+      //   <Container component="main" maxWidth="md">
+      //     <GameList games={games} />
+      //   </Container>
+      // );
+      // window.history.replaceState(null, "", "/searchPage");
+    }
+  };
 
   setAnchorElNav(value) {
     this.setState({ anchorElNav: value });
@@ -272,8 +380,14 @@ class NavBar extends React.Component {
           <Toolbar disableGutters>
             {this.renderMD()}
             {this.renderXS()}
-            <Searchbar />
+            <Search onKeyUp={this.inputKeyUp}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase placeholder="发现更多…" inputProps={{ "aria-label": "search" }} />
+            </Search>
             {this.renderAvatar()}
+            {this.searchRequest()}
           </Toolbar>
         </Container>
       </AppBar>

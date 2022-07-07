@@ -1,7 +1,8 @@
 import React from "react";
 import Container from "@mui/material/Container";
+import { Grid } from "@mui/material";
 import ClippedDrawer from "../components/Drawer";
-import GameList from "../components/GameList";
+import SquareCard from "../components/SquareCard";
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -16,10 +17,18 @@ export default class Home extends React.Component {
   render() {
     const { games } = this.state;
     return (
-      <Container component="main" maxWidth="md">
+      <>
         <ClippedDrawer onSaveGames={(value) => this.handleSaveGames(value)} />
-        <GameList games={games} />
-      </Container>
+        {/* <GameList games={games} /> */}
+        <Container maxWidth="md" component="main">
+          <Grid container sx={{ mt: 10 }} spacing={2}>
+            {games.map((gamesObj) => (
+              // <RectangleCard gamesObj={gamesObj} />
+              <SquareCard gamesObj={gamesObj} />
+            ))}
+          </Grid>
+        </Container>
+      </>
     );
   }
 }

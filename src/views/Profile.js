@@ -3,7 +3,7 @@ import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import ProfileCard from "../components/ProfileCard";
-import GameCard from "../components/GameCard";
+import SquareCard from "../components/SquareCard";
 
 export default class Profile extends Component {
   uid = this.props.uid;

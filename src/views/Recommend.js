@@ -15,7 +15,9 @@ export default class Recommend extends Component {
   componentDidMount() {
     axios
       .get(Api(`/games`), {
-        key: "favorite",
+        params: {
+          key: "favorite",
+        },
       })
       .then(
         (response) => {

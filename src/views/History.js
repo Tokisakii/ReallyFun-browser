@@ -18,7 +18,9 @@ export default class History extends Component {
   componentDidMount() {
     axios
       .get(Api(`/histories`), {
-        user_id: cookies.get("uid"),
+        params: {
+          user_id: cookies.get("uid"),
+        },
       })
       .then(
         (response) => {

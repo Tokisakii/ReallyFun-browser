@@ -18,7 +18,9 @@ export default class Upload extends Component {
   componentDidMount() {
     axios
       .get(Api(`/favorites`), {
-        user_id: cookies.get("uid"),
+        params: {
+          user_id: cookies.get("uid"),
+        },
       })
       .then(
         (response) => {

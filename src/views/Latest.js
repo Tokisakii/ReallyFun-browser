@@ -15,7 +15,9 @@ export default class Latest extends Component {
   componentDidMount() {
     axios
       .get(Api(`/games`), {
-        key: "time",
+        params: {
+          key: "time",
+        },
       })
       .then(
         (response) => {

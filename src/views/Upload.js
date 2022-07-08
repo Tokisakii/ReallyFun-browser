@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import axios from "axios";
 import Api from "../utils/Api";
-import GameList from "../components/GameList";
+import RectangleCard from "../components/RectangleCard";
 
 const cookies = new Cookies();
 
@@ -18,7 +18,9 @@ export default class Upload extends Component {
   componentDidMount() {
     axios
       .get(Api(`/favorites`), {
-        user_id: cookies.get("uid"),
+        params: {
+          user_id: cookies.get("uid"),
+        },
       })
       .then(
         (response) => {
@@ -33,8 +35,13 @@ export default class Upload extends Component {
 
   render() {
     return (
-      <Container component="main" maxWidth="md">
-        <GameList games={this.state.games} />
+      <Container maxWidth="md" component="main">
+        <Grid container sx={{ mt: 10 }} spacing={2}>
+          {this.state.games.map((gamesObj) => (
+            // <RectangleCard gamesObj={gamesObj} />
+            <RectangleCard gamesObj={gamesObj} />
+          ))}
+        </Grid>
       </Container>
     );
   }

@@ -28,8 +28,10 @@ class LogIn extends React.Component {
   handleLogin() {
     axios
       .post(Api(`/user/login`), {
-        name: this.state.uid,
-        password: this.state.passwd,
+        params: {
+          name: this.state.uid,
+          password: this.state.passwd,
+        },
       })
       .then((response) => {
         console.log(response);

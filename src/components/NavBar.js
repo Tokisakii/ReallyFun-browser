@@ -17,8 +17,8 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
+import Api from "../utils/Api";
 import History from "./History";
-import GameList from "./GameList";
 
 const pages = [
   { label: "首页", to: "/" },
@@ -123,9 +123,9 @@ class NavBar extends React.Component {
       this.searchRequest();
       console.log(this.state);
       axios
-        .get(
-          "http://127.0.0.1:4523/m1/1221635-0-default/games?key=&order=&search=&tag_id=2&withtag=1&page_size=&page_num="
-        )
+        .get(Api(`/games`), {
+          params: {},
+        })
         .then(
           (response) => {
             this.setState({ searchResult: response.data });
@@ -207,22 +207,23 @@ class NavBar extends React.Component {
             display: { xs: "none", md: "flex" },
           }}
         >
-          {this.props.uid !== null &&
-            pages.map(({ label, to }) => (
-              <Button
-                key={label}
-                onClick={(ev) => this.handleCloseNavMenu(ev)}
-                sx={{
-                  my: 2,
-                  color: "white",
-                  display: "block",
-                }}
-                component={Link}
-                to={to}
-              >
-                {label}
-              </Button>
-            ))}
+          {/* 若当前用户未登录，也可以浏览各游戏界面 */}
+          {/* {this.props.uid !== null && */}
+          {pages.map(({ label, to }) => (
+            <Button
+              key={label}
+              onClick={(ev) => this.handleCloseNavMenu(ev)}
+              sx={{
+                my: 2,
+                color: "white",
+                display: "block",
+              }}
+              component={Link}
+              to={to}
+            >
+              {label}
+            </Button>
+          ))}
         </Box>
       </>
     );

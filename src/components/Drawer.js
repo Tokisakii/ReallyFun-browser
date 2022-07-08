@@ -22,7 +22,7 @@ const drawerWidth = 200;
 
 export default class ClippedDrawer extends React.Component {
   handlegame() {
-    axios.get(Api(`/games?key=&order=&search=&tag_id=2&withtag=1&page_size=&page_num=`)).then(
+    axios.get(Api(`/games`), { params: {} }).then(
       (response) => {
         this.props.onSaveGames(response.data.data);
         console.log(response.data.data);

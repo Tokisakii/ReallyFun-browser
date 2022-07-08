@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Cookies from "universal-cookie";
 import NavBar from "./components/NavBar";
@@ -46,14 +46,7 @@ function App() {
     <Box sx={{ height: 1 }}>
       <NavBar navigate={navigate} uid={uid} onLogout={handleLogout} onSearch={handleSearch} />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <MyContext.Provider value={search}>
-              <Home />
-            </MyContext.Provider>
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/recommend" element={<Recommend />} />
         <Route path="/latest" element={<Latest />} />
         <Route path="/profile" element={<Profile uid={uid} />} />
@@ -62,8 +55,8 @@ function App() {
         <Route path="/upload" element={<Upload />} />
         <Route path="/login" element={<LogIn navigate={navigate} onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/GameList" element={<GameList />} /> */}
-        <Route path="/searchPage" element={<Searchpage />} />
+        <Route path="/GameList" element={<GameList />} />
+        <Route path="/searchPage/:searchParams" element={<Searchpage />} />
       </Routes>
     </Box>
   );

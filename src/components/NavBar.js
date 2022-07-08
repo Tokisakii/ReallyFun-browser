@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -117,8 +117,8 @@ class NavBar extends React.Component {
   inputKeyUp = (e) => {
     if (e.keyCode === 13) {
       console.log(e.target.value);
-      // History.replace({ pathname: "/searchPage", state: {} });
-      // History.go(0);
+      History.replace({ pathname: `/searchPage/${e.target.value}`, state: {} });
+      History.go(0);
       this.setState({ searchGame: e.target.value });
       this.searchRequest();
       console.log(this.state);
@@ -135,12 +135,11 @@ class NavBar extends React.Component {
             console.log("fail", error);
           }
         );
+      // <Navigate to="/searchPage" />;
       const { games } = this.state.searchResult;
-      // return (
-      //   <Container component="main" maxWidth="md">
-      //     <GameList games={games} />
-      //   </Container>
-      // );
+      <Container component="main" maxWidth="md">
+        <GameList games={games} />
+      </Container>;
       // window.history.replaceState(null, "", "/searchPage");
     }
   };
@@ -374,7 +373,19 @@ class NavBar extends React.Component {
     );
   }
 
+  // isSearch() {
+  //   const { games } = this.state.searchResult;
+  //   if ({ games }) {
+  //     return (
+  //       <Container component="main" maxWidth="md">
+  //         <GameList games={games} />
+  //       </Container>
+  //     );
+  //   }
+  // }
+
   render() {
+    const { games } = this.state.searchResult;
     return (
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Container maxWidth="xl">
@@ -387,10 +398,14 @@ class NavBar extends React.Component {
               </SearchIconWrapper>
               <StyledInputBase placeholder="发现更多…" inputProps={{ "aria-label": "search" }} />
             </Search>
+            {/* {this.state.searchResult !== {} ? <h4>111</h4> : <Navigate to="/searchPage" />} */}
             {this.renderAvatar()}
             {this.searchRequest()}
           </Toolbar>
         </Container>
+        {/* <Container component="main" maxWidth="md">
+          <GameList games={games} />
+        </Container> */}
       </AppBar>
     );
   }

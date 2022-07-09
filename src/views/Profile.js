@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Container, Grid } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import { Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import ProfileCard from "../components/ProfileCard";
 import SquareCard from "../components/SquareCard";
-
 import Api from "../utils/Api";
 
 export default class Profile extends Component {
@@ -75,7 +73,7 @@ export default class Profile extends Component {
           </Typography>
           <Grid container>
             <Grid item xs={12}>
-              <ProfileCard uid={this.uid} />
+              <ProfileCard uid={this.state.uid} />
             </Grid>
             {/* <Grid item xs={12}>
               <Typography component="div" variant="h3">

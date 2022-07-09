@@ -12,6 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { Grid } from "@mui/material";
 import ForumIcon from "@mui/icons-material/Forum";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
@@ -19,6 +20,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import Api from "../utils/Api";
 import History from "./History";
+import RectangleCard from "./RectangleCard";
 
 const pages = [
   { label: "首页", to: "/" },
@@ -31,13 +33,6 @@ const settings = [
   { label: "游玩历史", to: "/history" },
   { label: "上传游戏", to: "/upload" },
 ];
-
-// const inputKeyUp = (e) => {
-//   if (e.keyCode === 13) {
-//     // alert(e.target.value);
-//     console.log(e.target.value);
-//   }
-// };
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -79,23 +74,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// function Searchbar({ search, onSearch }) {
-//   return (
-//     <Search onKeyUp={inputKeyUp}>
-//       <SearchIconWrapper>
-//         <SearchIcon />
-//       </SearchIconWrapper>
-//       <StyledInputBase
-//         // value={search}
-//         // onChange={onSearch}
-//         placeholder="发现更多…"
-//         inputProps={{ "aria-label": "search" }}
-//       />
-//     </Search>
-//     // <div>{console.log(myRef.current.value)}</div>
-//   );
-// }
-
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -106,9 +84,6 @@ class NavBar extends React.Component {
       searchResult: [],
     };
   }
-  // handleSearch(value) {
-  //   this.setState({ searchGame: value });
-  // }
 
   searchRequest() {
     this.props.onSearch(this.state.searchGame);
@@ -137,8 +112,13 @@ class NavBar extends React.Component {
         );
       // <Navigate to="/searchPage" />;
       const { games } = this.state.searchResult;
-      <Container component="main" maxWidth="md">
-        <GameList games={games} />
+      <Container maxWidth="md" component="main">
+        <Grid container sx={{ mt: 10 }} spacing={2}>
+          {games.map((gamesObj) => (
+            <RectangleCard gamesObj={gamesObj} />
+            // <SquareCard gamesObj={gamesObj} />
+          ))}
+        </Grid>
       </Container>;
       // window.history.replaceState(null, "", "/searchPage");
     }

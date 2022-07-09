@@ -1,14 +1,21 @@
 import React, { Component } from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
-import FormHelperText from "@mui/material/FormHelperText";
-import { Alert, Grid, IconButton, ButtonGroup, Snackbar, InputLabel } from "@mui/material";
+import {
+  Alert,
+  Grid,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Card,
+  Button,
+  IconButton,
+  ButtonGroup,
+  Snackbar,
+  InputLabel,
+  TextField,
+  FormHelperText,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import axios from "axios";
 import Api from "../utils/Api";
@@ -36,9 +43,10 @@ export default class ProfileCard extends Component {
   }
 
   componentDidMount() {
+    this.setState({ id: this.props.uid });
     axios
-      .get(Api(`/user`), {
-        params: { uid: this.state.id },
+      .get(Api(`/user/`), {
+        params: { id: this.state.id },
       })
       .then((response) => {
         this.setState({

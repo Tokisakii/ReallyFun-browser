@@ -14,7 +14,7 @@ import Profile from "./views/Profile";
 import Recommend from "./views/Recommend";
 import Upload from "./views/Upload";
 import Searchpage from "./views/Searchpage";
-import GameList from "./components/GameList";
+// import GameList from "./components/GameList";
 
 const cookies = new Cookies();
 

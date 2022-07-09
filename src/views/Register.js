@@ -29,9 +29,11 @@ class Register extends React.Component {
   handleRegister() {
     axios
       .post(Api(`/user/register`), {
-        name: this.state.id,
-        password: this.state.passwd,
-        email: this.state.email,
+        params: {
+          name: this.state.id,
+          password: this.state.passwd,
+          email: this.state.email,
+        },
       })
       .then((response) => {
         console.log(response.message);

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Container from "@mui/material/Container";
+import { Grid, Container } from "@mui/material";
 import axios from "axios";
-import GameList from "../components/GameList";
 import { withParams, withNavigate } from "../utils/RouterTool";
+import RectangleCard from "../components/RectangleCard";
 
 class Searchpage extends React.Component {
   constructor(props) {
@@ -29,7 +29,12 @@ class Searchpage extends React.Component {
     const { games } = this.state;
     return (
       <Container component="main" maxWidth="md">
-        <GameList games={games} />
+        <Grid container sx={{ mt: 10 }} spacing={2}>
+          {games.map((gamesObj) => (
+            <RectangleCard gamesObj={gamesObj} />
+            // <SquareCard gamesObj={gamesObj} />
+          ))}
+        </Grid>
       </Container>
     );
   }

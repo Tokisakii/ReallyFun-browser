@@ -19,7 +19,6 @@ export default class Home extends React.Component {
     return (
       <>
         <ClippedDrawer onSaveGames={(value) => this.handleSaveGames(value)} />
-        {/* <GameList games={games} /> */}
         <Container maxWidth="md" component="main">
           <Grid container sx={{ mt: 10 }} spacing={2}>
             {games.map((gamesObj) => (

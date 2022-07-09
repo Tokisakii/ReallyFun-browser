@@ -49,7 +49,7 @@ export default class ClippedDrawer extends React.Component {
           <Box sx={{ overflow: "auto" }}>
             <List>
               <ListItem>
-                <ListItemButton>
+                <ListItemButton onClick={() => this.handlegame()}>
                   <ListItemIcon>
                     <SportsEsportsIcon />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;全部游戏

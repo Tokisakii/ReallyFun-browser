@@ -14,6 +14,7 @@ import Profile from "./views/Profile";
 import Recommend from "./views/Recommend";
 import Upload from "./views/Upload";
 import Searchpage from "./views/Searchpage";
+import Classify from "./views/Classify";
 
 const cookies = new Cookies();
 
@@ -43,6 +44,7 @@ function App() {
       <NavBar navigate={navigate} uid={uid} onLogout={handleLogout} onSearch={handleSearch} />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/classify" element={<Classify />} />
         <Route path="/recommend" element={<Recommend />} />
         <Route path="/latest" element={<Latest />} />
         <Route path="/profile" element={<Profile uid={uid} />} />

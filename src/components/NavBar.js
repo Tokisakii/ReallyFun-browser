@@ -24,6 +24,7 @@ import RectangleCard from "./RectangleCard";
 
 const pages = [
   { label: "首页", to: "/" },
+  { label: "游戏分类", to: "/classify" },
   { label: "热门推荐", to: "/recommend" },
   { label: "最新上线", to: "/latest" },
 ];

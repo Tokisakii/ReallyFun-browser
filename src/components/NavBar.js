@@ -1,26 +1,26 @@
 import * as React from "react";
 import { Link, Navigate } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import { Grid } from "@mui/material";
-import ForumIcon from "@mui/icons-material/Forum";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+  InputBase,
+} from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
+import MenuIcon from "@mui/icons-material/Menu";
+import ForumIcon from "@mui/icons-material/Forum";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import Api from "../utils/Api";
 import History from "./History";
-import RectangleCard from "./RectangleCard";
 
 const pages = [
   { label: "首页", to: "/" },
@@ -30,6 +30,7 @@ const pages = [
 ];
 const settings = [
   { label: "个人空间", to: "/profile" },
+  { label: "处理反馈", to: "/handlefeedback" },
   { label: "我的收藏", to: "/collection" },
   { label: "游玩历史", to: "/history" },
   { label: "上传游戏", to: "/upload" },
@@ -111,17 +112,6 @@ class NavBar extends React.Component {
             console.log("fail", error);
           }
         );
-      // <Navigate to="/searchPage" />;
-      const { games } = this.state.searchResult;
-      <Container maxWidth="md" component="main">
-        <Grid container sx={{ mt: 10 }} spacing={2}>
-          {games.map((gamesObj) => (
-            <RectangleCard gamesObj={gamesObj} />
-            // <SquareCard gamesObj={gamesObj} />
-          ))}
-        </Grid>
-      </Container>;
-      // window.history.replaceState(null, "", "/searchPage");
     }
   };
 
@@ -193,6 +183,7 @@ class NavBar extends React.Component {
             <Button
               key={label}
               onClick={(ev) => this.handleCloseNavMenu(ev)}
+              align="center"
               sx={{
                 my: 2,
                 color: "white",

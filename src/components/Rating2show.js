@@ -1,6 +1,5 @@
 import * as React from "react";
-import Rating from "@mui/material/Rating";
-import Stack from "@mui/material/Stack";
+import { Rating, Stack } from "@mui/material";
 
 export default function Rating2show({ value }) {
   return (

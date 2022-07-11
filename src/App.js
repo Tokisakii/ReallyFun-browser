@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
-import Box from "@mui/material/Box";
+import { Box, Container } from "@mui/material";
 import Cookies from "universal-cookie";
 import NavBar from "./components/NavBar";
 import LogIn from "./views/Login";
@@ -15,6 +15,8 @@ import Recommend from "./views/Recommend";
 import Upload from "./views/Upload";
 import Searchpage from "./views/Searchpage";
 import Classify from "./views/Classify";
+import Copyright from "./components/Copyright";
+import HandleFeedback from "./views/HandleFeedback";
 
 const cookies = new Cookies();
 
@@ -23,6 +25,10 @@ function App() {
 
   const initUid = cookies.get("uid");
   const [uid, setUid] = React.useState(initUid || null);
+  const [name, setName] = React.useState(null);
+  const [email, setEmail] = React.useState(null);
+  const [avatar, setAvatar] = React.useState(null);
+  const [auth, setAuth] = React.useState(null);
   const [search, setSearch] = React.useState(null);
 
   const handleSearch = (newSearch) => {
@@ -40,8 +46,15 @@ function App() {
   };
 
   return (
-    <Box sx={{ height: 1 }}>
-      <NavBar navigate={navigate} uid={uid} onLogout={handleLogout} onSearch={handleSearch} />
+    <Container fixed maxWidth="lg" component="main">
+      <NavBar
+        navigate={navigate}
+        uid={uid}
+        avatar={avatar}
+        onLogout={handleLogout}
+        onSearch={handleSearch}
+      />
+      {/* {console.log(avatar)} */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/classify" element={<Classify />} />
@@ -54,8 +67,10 @@ function App() {
         <Route path="/login" element={<LogIn navigate={navigate} onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/searchPage/:searchParams" element={<Searchpage />} />
+        <Route path="/handlefeedback" element={<HandleFeedback />} />
       </Routes>
-    </Box>
+      <Copyright sx={{ md: 4 }} />
+    </Container>
   );
 }
 

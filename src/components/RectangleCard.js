@@ -1,10 +1,14 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Chip from "@mui/material/Chip";
-import Typography from "@mui/material/Typography";
-import { Stack, CardActionArea, Grid } from "@mui/material";
+import {
+  Stack,
+  Card,
+  CardContent,
+  CardMedia,
+  Chip,
+  Typography,
+  CardActionArea,
+  Grid,
+} from "@mui/material";
 import Reating2show from "./Rating2show";
 
 export default class RectangleCard extends React.Component {

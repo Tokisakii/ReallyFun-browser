@@ -1,6 +1,5 @@
 import React from "react";
-import Container from "@mui/material/Container";
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import ClippedDrawer from "../components/Drawer";
 import SquareCard from "../components/SquareCard";
 

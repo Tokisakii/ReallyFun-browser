@@ -99,11 +99,11 @@ export default class Profile extends Component {
                           component="img"
                           height="100"
                           width="150"
-                          image={historyObj.game_info.thumb}
-                          alt={historyObj.game_info.title}
+                          image={historyObj.game.thumb}
+                          alt={historyObj.game.title}
                         />
                         <CardContent height="50" width="150">
-                          <div>{historyObj.game_info.title}</div>
+                          <div>{historyObj.game.title}</div>
                         </CardContent>
                       </CardActionArea>
                     </Card>

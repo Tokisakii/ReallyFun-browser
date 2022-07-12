@@ -57,8 +57,8 @@ export default class History extends Component {
                         component="img"
                         height="150"
                         width="150"
-                        image={historyObj.game_info.thumb}
-                        alt={historyObj.game_info.title}
+                        image={historyObj.game.thumb}
+                        alt={historyObj.game.title}
                       />
                     </Grid>
                     <Grid item xs={9}>
@@ -66,7 +66,7 @@ export default class History extends Component {
                         <Grid container spacing={1}>
                           <Grid item xs={12}>
                             <Typography gutterBottom variant="h6" component="div">
-                              {historyObj.game_info.title}
+                              {historyObj.game.title}
                             </Typography>
                           </Grid>
                           <Grid item xs={12}>
@@ -79,12 +79,12 @@ export default class History extends Component {
                                 overflow: "hidden",
                               }}
                             >
-                              {historyObj.game_info.intro}
+                              {historyObj.game.intro}
                             </Typography>
                           </Grid>
                           {/* <Grid item xs={8}>
                             <Stack direction="row" spacing={1}>
-                              {historyObj.game_info.tags.map((tags) => (
+                              {historyObj.game.tags.map((tags) => (
                                 // <RectangleCard gamesObj={gamesObj} />
                                 <Chip label={tags.content} />
                               ))}
@@ -92,9 +92,9 @@ export default class History extends Component {
                           </Grid> */}
                           <Grid item xs={4}>
                             <Stack direction="row">
-                              <Reating2show value={historyObj.game_info.rating / 2} />
+                              <Reating2show value={historyObj.game.rating / 2} />
                               <Typography variant="body5" color="text.secondary">
-                                {historyObj.game_info.rating}
+                                {historyObj.game.rating}
                               </Typography>
                             </Stack>
                           </Grid>

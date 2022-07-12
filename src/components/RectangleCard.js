@@ -1,12 +1,17 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Chip from "@mui/material/Chip";
-import Typography from "@mui/material/Typography";
-import { Stack, CardActionArea, Grid } from "@mui/material";
+import {
+  Stack,
+  Card,
+  CardContent,
+  CardMedia,
+  Chip,
+  Typography,
+  CardActionArea,
+  Grid,
+} from "@mui/material";
 import Reating2show from "./Rating2show";
 
+// 长方形卡片，用于展示游戏标题、简介、缩略图、评分等信息
 export default class RectangleCard extends React.Component {
   render() {
     const { gamesObj } = this.props;
@@ -45,14 +50,14 @@ export default class RectangleCard extends React.Component {
                         {gamesObj.intro}
                       </Typography>
                     </Grid>
-                    <Grid item xs={8}>
+                    {/* <Grid item xs={8}>
                       <Stack direction="row" spacing={1}>
                         {gamesObj.tags.map((tags) => (
                           // <RectangleCard gamesObj={gamesObj} />
                           <Chip label={tags.content} />
                         ))}
                       </Stack>
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={4}>
                       <Stack direction="row">
                         <Reating2show value={gamesObj.rating / 2} />

@@ -1,44 +1,43 @@
 import * as React from "react";
 import { Link, Navigate } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import ForumIcon from "@mui/icons-material/Forum";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+  InputBase,
+} from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
+import MenuIcon from "@mui/icons-material/Menu";
+import ForumIcon from "@mui/icons-material/Forum";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import Api from "../utils/Api";
 import History from "./History";
 
+// 导航栏左上方显示的标签
 const pages = [
   { label: "首页", to: "/" },
+  { label: "游戏分类", to: "/classify" },
   { label: "热门推荐", to: "/recommend" },
   { label: "最新上线", to: "/latest" },
 ];
+// 点击个人头像后显示的菜单
 const settings = [
   { label: "个人空间", to: "/profile" },
+  { label: "管理面板", to: "/admin" },
   { label: "我的收藏", to: "/collection" },
   { label: "游玩历史", to: "/history" },
   { label: "上传游戏", to: "/upload" },
 ];
-
-// const inputKeyUp = (e) => {
-//   if (e.keyCode === 13) {
-//     // alert(e.target.value);
-//     console.log(e.target.value);
-//   }
-// };
-
+// 定义搜索条的风格
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -79,23 +78,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// function Searchbar({ search, onSearch }) {
-//   return (
-//     <Search onKeyUp={inputKeyUp}>
-//       <SearchIconWrapper>
-//         <SearchIcon />
-//       </SearchIconWrapper>
-//       <StyledInputBase
-//         // value={search}
-//         // onChange={onSearch}
-//         placeholder="发现更多…"
-//         inputProps={{ "aria-label": "search" }}
-//       />
-//     </Search>
-//     // <div>{console.log(myRef.current.value)}</div>
-//   );
-// }
-
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -106,14 +88,12 @@ class NavBar extends React.Component {
       searchResult: [],
     };
   }
-  // handleSearch(value) {
-  //   this.setState({ searchGame: value });
-  // }
 
   searchRequest() {
     this.props.onSearch(this.state.searchGame);
   }
 
+  // 监测Enter键是否被按下
   inputKeyUp = (e) => {
     if (e.keyCode === 13) {
       console.log(e.target.value);
@@ -135,12 +115,6 @@ class NavBar extends React.Component {
             console.log("fail", error);
           }
         );
-      // <Navigate to="/searchPage" />;
-      const { games } = this.state.searchResult;
-      <Container component="main" maxWidth="md">
-        <GameList games={games} />
-      </Container>;
-      // window.history.replaceState(null, "", "/searchPage");
     }
   };
 
@@ -152,6 +126,7 @@ class NavBar extends React.Component {
     this.setState({ anchorElUser: value });
   }
 
+  // 处理登出事件
   async handleLogout() {
     console.log("handleLogout");
     this.props.onLogout();
@@ -159,26 +134,31 @@ class NavBar extends React.Component {
     History.go(0);
   }
 
+  // 处理打开导航栏目录事件
   handleOpenNavMenu(event) {
     console.log("handleOpenNavMenu");
     this.setAnchorElNav(event.currentTarget);
   }
 
+  // 处理打开用户菜单事件
   handleOpenUserMenu(event) {
     console.log("handleOpenUserMenu");
     this.setAnchorElUser(event.currentTarget);
   }
 
+  // 处理关闭导航栏目录事件
   handleCloseNavMenu() {
     console.log("handleCloseNavMenu");
     this.setAnchorElNav(null);
   }
 
+  // 处理关闭用户菜单事件
   handleCloseUserMenu() {
     console.log("handleCloseUserMenu");
     this.setAnchorElUser(null);
   }
 
+  // 渲染中等屏幕下的展示效果
   renderMD() {
     return (
       <>
@@ -212,6 +192,7 @@ class NavBar extends React.Component {
             <Button
               key={label}
               onClick={(ev) => this.handleCloseNavMenu(ev)}
+              align="center"
               sx={{
                 my: 2,
                 color: "white",
@@ -228,6 +209,7 @@ class NavBar extends React.Component {
     );
   }
 
+  // 较小页面展示效果
   renderXS() {
     return (
       <>
@@ -305,6 +287,7 @@ class NavBar extends React.Component {
     );
   }
 
+  // 渲染头像及菜单
   renderAvatar() {
     return (
       <>
@@ -373,39 +356,24 @@ class NavBar extends React.Component {
     );
   }
 
-  // isSearch() {
-  //   const { games } = this.state.searchResult;
-  //   if ({ games }) {
-  //     return (
-  //       <Container component="main" maxWidth="md">
-  //         <GameList games={games} />
-  //       </Container>
-  //     );
-  //   }
-  // }
-
   render() {
-    const { games } = this.state.searchResult;
     return (
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {this.renderMD()}
             {this.renderXS()}
+            {/* 插入搜索条 */}
             <Search onKeyUp={this.inputKeyUp}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase placeholder="发现更多…" inputProps={{ "aria-label": "search" }} />
             </Search>
-            {/* {this.state.searchResult !== {} ? <h4>111</h4> : <Navigate to="/searchPage" />} */}
             {this.renderAvatar()}
             {this.searchRequest()}
           </Toolbar>
         </Container>
-        {/* <Container component="main" maxWidth="md">
-          <GameList games={games} />
-        </Container> */}
       </AppBar>
     );
   }

@@ -1,14 +1,16 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import History from "../components/History";
@@ -16,6 +18,7 @@ import Api from "../utils/Api";
 
 const theme = createTheme();
 
+// 登陆界面，登陆成功后自动跳转到首页
 class LogIn extends React.Component {
   constructor(props) {
     super(props);
@@ -69,7 +72,7 @@ class LogIn extends React.Component {
                 margin="normal"
                 required
                 fullWidth
-                id="name"
+                id="username"
                 label="用户名"
                 name="name"
                 autoComplete="name"
@@ -99,12 +102,8 @@ class LogIn extends React.Component {
                 登录
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="/forgot" variant="body2">
-                    忘记密码？
-                  </Link>
-                </Grid>
                 <Grid item>
+                  {/* 跳转到注册界面 */}
                   <Link href="/register" variant="body2">
                     没有账号？点击注册
                   </Link>

@@ -193,7 +193,7 @@ export default class GameInfoCard extends React.Component {
                       disabled={!(this.state.change || this.state.create)}
                       required
                       fullWidth
-                      id="title"
+                      id="gamename"
                       label="游戏名称"
                       value={this.state.title}
                       variant="standard"
@@ -207,7 +207,7 @@ export default class GameInfoCard extends React.Component {
                       fullWidth
                       multiline
                       maxRows={2}
-                      id="title"
+                      id="intro"
                       label="游戏简介"
                       value={this.state.intro}
                       onChange={(e) => this.setStateIntro(e)}
@@ -220,7 +220,7 @@ export default class GameInfoCard extends React.Component {
                       fullWidth
                       multiline
                       maxRows={2}
-                      id="title"
+                      id="tutorial"
                       label="游戏玩法"
                       value={this.state.tutorial}
                       onChange={(e) => this.setStateTutorial(e)}
@@ -231,7 +231,7 @@ export default class GameInfoCard extends React.Component {
                       disabled={!(this.state.change || this.state.create)}
                       required
                       fullWidth
-                      id="title"
+                      id="entry"
                       label="入口文件路径"
                       value={this.state.entry}
                       variant="standard"

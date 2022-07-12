@@ -74,7 +74,7 @@ class Register extends React.Component {
                     margin="normal"
                     required
                     fullWidth
-                    id="name"
+                    id="username"
                     label="用户名"
                     name="name"
                     autoComplete="name"

@@ -17,6 +17,7 @@ import Searchpage from "./views/Searchpage";
 import Classify from "./views/Classify";
 import Copyright from "./components/Copyright";
 import HandleFeedback from "./views/HandleFeedback";
+import Admin from "./views/Admin";
 
 const cookies = new Cookies();
 
@@ -67,7 +68,8 @@ function App() {
         <Route path="/login" element={<LogIn navigate={navigate} onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/searchPage/:searchParams" element={<Searchpage />} />
-        <Route path="/admin" element={<HandleFeedback />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/handlefeedback" element={<HandleFeedback />} />
       </Routes>
       <Copyright sx={{ md: 4 }} />
     </Container>

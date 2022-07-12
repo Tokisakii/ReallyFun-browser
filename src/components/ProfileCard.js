@@ -216,7 +216,7 @@ export default class ProfileCard extends Component {
                   <Grid item xs={6}>
                     <TextField
                       disabled={!this.state.Changeinfo}
-                      id="name"
+                      id="username"
                       label="用户名"
                       value={this.state.name}
                       variant="standard"

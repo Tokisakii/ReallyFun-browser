@@ -11,7 +11,6 @@ import {
   Grid,
   Snackbar,
 } from "@mui/material";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import axios from "axios";
 import Api from "../utils/Api";
 
@@ -19,21 +18,22 @@ export default class GameInfoCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      create: 0,
-      change: false,
-      id: "",
-      title: "",
-      intro: "",
-      tutorial: "",
-      entry: "",
-      bundle: "",
-      thumb: "",
-      hidden: false,
-      delete: false,
-      open: false,
+      create: 0, // 是否为新建游戏卡片：0为已上传游戏卡片，1为新建游戏卡片
+      change: false, // 判定是否修改游戏详情
+      id: "", // 游戏id
+      title: "", // 游戏标题
+      intro: "", // 游戏介绍
+      tutorial: "", // 游戏玩法
+      entry: "", // 游戏入口文件
+      bundle: "", // 游戏源文件
+      thumb: "", // 游戏缩略图
+      hidden: false, // 是否隐藏游戏
+      delete: false, // 是否删除游戏
+      open: false, // 是否打开消息条
     };
   }
 
+  // 初始化：若不是新建游戏卡片，则get该游戏id对应的详细信息；否则将this.state.create设为1
   componentDidMount() {
     if (this.props.create === 0) {
       this.setState({ id: this.props.id });
@@ -109,6 +109,7 @@ export default class GameInfoCard extends React.Component {
     this.setState({ delete: !temp, open: true });
   }
 
+  // 创建游戏并刷新当前页面
   handleCreateGame() {
     axios
       .post(Api(`/game`), {
@@ -130,6 +131,7 @@ export default class GameInfoCard extends React.Component {
       });
   }
 
+  // 上传游戏源文件
   handleUploadBundle() {
     axios
       .post(Api(`/game/bundle`), {
@@ -143,6 +145,7 @@ export default class GameInfoCard extends React.Component {
       });
   }
 
+  // 上传游戏缩略图
   handleUploadThumb() {
     axios
       .post(Api(`/game/thumb`), {
@@ -156,6 +159,7 @@ export default class GameInfoCard extends React.Component {
       });
   }
 
+  // 提交修改并刷新页面
   handleSubmit() {
     this.handleUploadBundle();
     this.handleUploadThumb();
@@ -163,6 +167,7 @@ export default class GameInfoCard extends React.Component {
     window.location.reload();
   }
 
+  // 删除当前id对应游戏并刷新页面
   handleDelete() {
     axios
       .delete(Api(`/game/`), {
@@ -180,19 +185,18 @@ export default class GameInfoCard extends React.Component {
   }
 
   render() {
-    const { gamesObj } = this.props;
     return (
       <Grid item xs={12}>
         <Card sx={{ maxWidth: "md" }}>
           <Grid container>
             <Grid item xs={8}>
-              <CardContent height="150" width="450">
+              <CardContent>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <TextField
                       disabled={!(this.state.change || this.state.create)}
-                      required
-                      fullWidth
+                      required // 必填
+                      fullWidth // 全宽度
                       id="gamename"
                       label="游戏名称"
                       value={this.state.title}
@@ -202,11 +206,11 @@ export default class GameInfoCard extends React.Component {
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
-                      disabled={!(this.state.change || this.state.create)}
+                      disabled={!(this.state.change || this.state.create)} // 非修改和创建状态下无法修改
                       required
                       fullWidth
                       multiline
-                      maxRows={2}
+                      maxRows={2} // 最大显示行数为2
                       id="intro"
                       label="游戏简介"
                       value={this.state.intro}
@@ -249,7 +253,7 @@ export default class GameInfoCard extends React.Component {
                           <input
                             type="file"
                             hidden
-                            accept="image/*"
+                            accept="image/*" // 接收所有image文件
                             onChange={(e) => this.setStateThumb(e)}
                           />
                           上传缩略图
@@ -264,7 +268,7 @@ export default class GameInfoCard extends React.Component {
                           <input
                             type="file"
                             hidden
-                            accept=".zip"
+                            accept=".zip" // 只接受.zip文件
                             onChange={(e) => this.setStateBundle(e)}
                           />
                           上传源文件
@@ -273,10 +277,10 @@ export default class GameInfoCard extends React.Component {
                       <Grid item xs={4}>
                         <FormControlLabel
                           control={
+                            // Checkbox组件用于展示当前游戏是否被隐藏
                             <Checkbox
                               checked={this.state.hidden}
                               onChange={() => this.changeHidden()}
-                              inputProps={{ "aria-label": "controlled" }}
                               size="small"
                             />
                           }
@@ -293,7 +297,7 @@ export default class GameInfoCard extends React.Component {
                           variant="contained"
                           color="success"
                           onClick={() => this.handleCreateGame()}
-                          sx={{ display: this.state.create ? "block" : "none" }}
+                          sx={{ display: this.state.create ? "block" : "none" }} // 仅在创建模式下显示
                         >
                           提交创建
                         </Button>
@@ -301,7 +305,7 @@ export default class GameInfoCard extends React.Component {
                           variant="contained"
                           onClick={() => this.setStateChange()}
                           sx={{
-                            display: this.state.change || this.state.create ? "none" : "block",
+                            display: this.state.change || this.state.create ? "none" : "block", // 仅在修改模式下显示
                           }}
                         >
                           修改信息
@@ -310,7 +314,7 @@ export default class GameInfoCard extends React.Component {
                           variant="contained"
                           color="success"
                           onClick={() => this.handleSubmit()}
-                          sx={{ display: this.state.change ? "block" : "none" }}
+                          sx={{ display: this.state.change ? "block" : "none" }} // 修改信息完毕后用于提交
                         >
                           提交修改
                         </Button>
@@ -326,8 +330,8 @@ export default class GameInfoCard extends React.Component {
                         >
                           删除游戏
                         </Button>
+                        {/* 消息条用于提示用户是否确实要删除游戏 */}
                         <Snackbar open={this.state.open} autoHideDuration={6000}>
-                          {/* <Snackbar autoHideDuration={6000}> */}
                           <Alert
                             severity="warning"
                             action={
@@ -362,6 +366,7 @@ export default class GameInfoCard extends React.Component {
               </CardContent>
             </Grid>
             <Grid item xs={4}>
+              {/* 用于展示缩略图 */}
               <CardMedia
                 component="img"
                 // height="200"

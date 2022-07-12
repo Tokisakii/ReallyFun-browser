@@ -3,6 +3,7 @@ import { Container, Grid } from "@mui/material";
 import ClippedDrawer from "../components/Drawer";
 import SquareCard from "../components/SquareCard";
 
+// 游戏分类界面，由侧边栏、正方形游戏卡片组成
 export default class Classify extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +15,6 @@ export default class Classify extends React.Component {
   }
 
   render() {
-    // const { games } = this.state;
     return (
       <>
         <ClippedDrawer onSaveGames={(value) => this.handleSaveGames(value)} />

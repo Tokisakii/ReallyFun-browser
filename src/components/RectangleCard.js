@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import Reating2show from "./Rating2show";
 
+// 长方形卡片，用于展示游戏标题、简介、缩略图、评分等信息
 export default class RectangleCard extends React.Component {
   render() {
     const { gamesObj } = this.props;

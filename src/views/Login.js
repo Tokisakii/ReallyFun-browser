@@ -18,6 +18,7 @@ import Api from "../utils/Api";
 
 const theme = createTheme();
 
+// 登陆界面，登陆成功后自动跳转到首页
 class LogIn extends React.Component {
   constructor(props) {
     super(props);
@@ -101,12 +102,8 @@ class LogIn extends React.Component {
                 登录
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="/forgot" variant="body2">
-                    忘记密码？
-                  </Link>
-                </Grid>
                 <Grid item>
+                  {/* 跳转到注册界面 */}
                   <Link href="/register" variant="body2">
                     没有账号？点击注册
                   </Link>

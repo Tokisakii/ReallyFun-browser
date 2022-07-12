@@ -17,6 +17,7 @@ import Reating2show from "../components/Rating2show";
 
 const cookies = new Cookies();
 
+// 游玩历史界面，用于展示用户游玩过的游戏列表
 export default class History extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +26,7 @@ export default class History extends Component {
     };
   }
 
+  // get用户的游玩历史
   componentDidMount() {
     axios
       .get(Api(`/histories`), {
@@ -49,6 +51,7 @@ export default class History extends Component {
           {this.state.history.map((historyObj) => (
             // <RectangleCard gamesObj={gamesObj} />
             <Grid item xs={12}>
+              {/* 将游玩历史通过卡片进行展示 */}
               <CardActionArea onClick={() => console.log("handleInfor")}>
                 <Card sx={{ maxWidth: "md" }}>
                   <Grid container>
@@ -98,6 +101,7 @@ export default class History extends Component {
                               </Typography>
                             </Stack>
                           </Grid>
+                          {/* 显示该游戏游玩总时长 */}
                           <Grid item xs={4}>
                             <Typography
                               gutterBottom
@@ -108,6 +112,7 @@ export default class History extends Component {
                               游玩总时长:{historyObj.total_time}分钟
                             </Typography>
                           </Grid>
+                          {/* 显示上次游玩该游戏的时间 */}
                           <Grid item xs={4}>
                             <Typography
                               gutterBottom

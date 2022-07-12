@@ -18,6 +18,7 @@ import Api from "../utils/Api";
 
 const theme = createTheme();
 
+// 注册界面，注册成功后跳转到登陆界面
 class Register extends React.Component {
   constructor(props) {
     super(props);

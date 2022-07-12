@@ -12,6 +12,7 @@ export default class HandleFeedback extends Component {
     };
   }
 
+  // 获取全部反馈
   getAllFeedbacks() {
     axios
       .get(Api(`/feedbacks`), {
@@ -21,13 +22,13 @@ export default class HandleFeedback extends Component {
         this.setState({
           feedbacklist: response.data.data,
         });
-        // console.log(this.state.feedbacklist);
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
+  // 获取未处理的反馈
   getUndoFeedbacks() {
     axios
       .get(Api(`/feedbacks`), {
@@ -44,8 +45,9 @@ export default class HandleFeedback extends Component {
       });
   }
 
+  // 默认返回未处理反馈
   componentDidMount() {
-    this.getAllFeedbacks();
+    this.getUndoFeedbacks();
   }
 
   render() {
@@ -54,6 +56,7 @@ export default class HandleFeedback extends Component {
         <Typography component="div" variant="h5">
           反馈列表
         </Typography>
+        {/* 两个按钮，用于切换全部反馈以及未处理反馈 */}
         <ToggleButtonGroup exclusive aria-label="SortBy" size="small">
           <ToggleButton value="rate" aria-label="SortByRate" onClick={() => this.getAllFeedbacks()}>
             全部反馈
@@ -66,6 +69,7 @@ export default class HandleFeedback extends Component {
             未处理反馈
           </ToggleButton>
         </ToggleButtonGroup>
+        {/* 利用map将所有反馈通过FeedbackCard展示出来，间距为2 */}
         <Grid container spacing={2}>
           {this.state.feedbacklist.map((feedback) => (
             <FeedbackCard feedback={feedback} />

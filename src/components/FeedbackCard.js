@@ -15,6 +15,17 @@ export default class FeedbackCard extends React.Component {
     };
   }
 
+  feedbackList = [
+    "游戏白屏",
+    "游戏加载很慢",
+    "游戏玩不了",
+    "游戏存在BUG",
+    "游戏评分无法提交",
+    "游戏页面错误",
+    "色情暴力内容",
+    "其他问题",
+  ];
+
   handleSubmit() {
     axios
       .post(Api(`/feedback/handle`), {
@@ -41,13 +52,13 @@ export default class FeedbackCard extends React.Component {
               No.{feedback.id}
             </Typography>
             <Typography variant="body1" component="div">
-              来自用户{feedback.user_id}的反馈：
+              来自id为{feedback.user_id}用户的反馈：
             </Typography>
             <Typography variant="body2" component="div" color="text.secondary">
-              在游戏{feedback.game_id}中:
+              在游戏编号{feedback.game_id}中:
             </Typography>
             <Typography variant="body2" component="div" color="text.secondary">
-              出现了编号为{feedback.category}的问题：
+              出现了{this.feedbackList[feedback.category]}的问题：
             </Typography>
             <Typography sx={{ mb: 1.5 }} variant="body2">
               详细描述：
@@ -58,8 +69,8 @@ export default class FeedbackCard extends React.Component {
               id="standard-basic"
               label="处理意见"
               defaultValue={feedback.handle_comment}
-              multiline
-              rows={4}
+              multiline // 多行
+              rows={4} // 固定4行
               onChange={(ev) => this.setState({ handle_comment: ev.target.value })}
             />
             <Typography sx={{ mb: 1.5 }} variant="body2">

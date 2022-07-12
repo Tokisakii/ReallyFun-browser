@@ -4,6 +4,7 @@ import axios from "axios";
 import Api from "../utils/Api";
 import RectangleCard from "../components/RectangleCard";
 
+// 用于展示最新上线的游戏
 export default class Latest extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +36,6 @@ export default class Latest extends Component {
       <Container maxWidth="md" component="main">
         <Grid container sx={{ mt: 10 }} spacing={2}>
           {this.state.games.map((gamesObj) => (
-            // <RectangleCard gamesObj={gamesObj} />
             <RectangleCard gamesObj={gamesObj} />
           ))}
         </Grid>

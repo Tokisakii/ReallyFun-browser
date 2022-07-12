@@ -4,6 +4,7 @@ import axios from "axios";
 import RectangleCard from "../components/RectangleCard";
 import Api from "../utils/Api";
 
+// 根据收藏数获取游戏列表
 export default class Recommend extends React.Component {
   constructor(props) {
     super(props);

@@ -18,6 +18,7 @@ import Classify from "./views/Classify";
 import Copyright from "./components/Copyright";
 import HandleFeedback from "./views/HandleFeedback";
 import Admin from "./views/Admin";
+import Feedback from "./views/Feedback";
 
 const cookies = new Cookies();
 
@@ -26,10 +27,7 @@ function App() {
 
   const initUid = cookies.get("uid");
   const [uid, setUid] = React.useState(initUid || null);
-  const [name, setName] = React.useState(null);
-  const [email, setEmail] = React.useState(null);
   const [avatar, setAvatar] = React.useState(null);
-  const [auth, setAuth] = React.useState(null);
   const [search, setSearch] = React.useState(null);
 
   const handleSearch = (newSearch) => {
@@ -55,7 +53,6 @@ function App() {
         onLogout={handleLogout}
         onSearch={handleSearch}
       />
-      {/* {console.log(avatar)} */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/classify" element={<Classify />} />
@@ -68,8 +65,9 @@ function App() {
         <Route path="/login" element={<LogIn navigate={navigate} onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/searchPage/:searchParams" element={<Searchpage />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={<Admin uid={uid} />} />
         <Route path="/handlefeedback" element={<HandleFeedback />} />
+        <Route path="/feedback" element={<Feedback />} />
       </Routes>
       <Copyright sx={{ md: 4 }} />
     </Container>

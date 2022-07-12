@@ -14,6 +14,7 @@ import ProfileCard from "../components/ProfileCard";
 import SquareCard from "../components/SquareCard";
 import Api from "../utils/Api";
 
+// 个人空间，用于展示及修改个人资料、游玩历史、收藏、上传等
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +32,7 @@ export default class Profile extends Component {
 
   componentDidMount() {
     this.handleGetUid(this.props.uid);
+    // get当前用户收藏的游戏
     axios
       .get(Api(`/favorites`), {
         params: {
@@ -45,8 +47,9 @@ export default class Profile extends Component {
           console.log("fail", error);
         }
       );
+    // get当前用户上传的游戏
     axios
-      .get(Api(`/favorites`), {
+      .get(Api(`/games`), {
         params: {
           user_id: this.state.uid,
         },
@@ -59,6 +62,7 @@ export default class Profile extends Component {
           console.log("fail", error);
         }
       );
+    // get当前用户的游玩历史
     axios
       .get(Api(`/histories`), {
         user_id: this.state.uid,
@@ -89,9 +93,9 @@ export default class Profile extends Component {
               <Typography component="div" variant="h5">
                 <Link href="/history">游玩历史</Link>
               </Typography>
+              {/* 展示游玩历史 */}
               <Grid container spacing={2}>
                 {this.state.history.map((historyObj) => (
-                  // <RectangleCard gamesObj={gamesObj} />
                   <Grid item xs={2}>
                     <Card sx={{ maxWidth: 150, maxHeight: 150 }}>
                       <CardActionArea onClick={() => console.log("handleInfor")}>
@@ -102,7 +106,7 @@ export default class Profile extends Component {
                           image={historyObj.game.thumb}
                           alt={historyObj.game.title}
                         />
-                        <CardContent height="50" width="150">
+                        <CardContent height="50" width="150" align="center">
                           <div>{historyObj.game.title}</div>
                         </CardContent>
                       </CardActionArea>
@@ -117,7 +121,6 @@ export default class Profile extends Component {
               </Typography>
               <Grid container spacing={2}>
                 {this.state.favoriteGames.map((gamesObj) => (
-                  // <RectangleCard gamesObj={gamesObj} />
                   <SquareCard gamesObj={gamesObj} />
                 ))}
               </Grid>
@@ -128,7 +131,6 @@ export default class Profile extends Component {
               </Typography>
               <Grid container spacing={2}>
                 {this.state.uploadedGames.map((gamesObj) => (
-                  // <RectangleCard gamesObj={gamesObj} />
                   <SquareCard gamesObj={gamesObj} />
                 ))}
               </Grid>

@@ -23,6 +23,7 @@ import Api from "../utils/Api";
 const drawerWidth = 200;
 
 export default class ClippedDrawer extends React.Component {
+  // 用于查找具有对应标签id的游戏
   handlegame(value) {
     axios.get(Api(`/games`), { params: { tag_id: value } }).then(
       (response) => {
@@ -35,6 +36,7 @@ export default class ClippedDrawer extends React.Component {
     );
   }
 
+  // 初始显示全部游戏
   componentDidMount() {
     this.handlegame();
   }

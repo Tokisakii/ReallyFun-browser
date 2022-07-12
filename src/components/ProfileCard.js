@@ -156,13 +156,7 @@ export default class ProfileCard extends Component {
         },
       })
       .then((response) => {
-        // if (response.data.code === 0) {
         console.log(response.data);
-        //   const temp = this.state.name;
-        // this.setState({
-        //   name: temp,
-        // });
-        // }
       })
       .catch((error) => {
         console.log(error);
@@ -201,6 +195,7 @@ export default class ProfileCard extends Component {
       <Card>
         <Grid container>
           <Grid item xs={4}>
+            {/* 卡片媒体为用户头像 */}
             <CardMedia
               component="img"
               height="250"
@@ -214,6 +209,7 @@ export default class ProfileCard extends Component {
               <CardContent>
                 <Grid container>
                   <Grid item xs={6}>
+                    {/* 用于输入用户名 */}
                     <TextField
                       disabled={!this.state.Changeinfo}
                       id="username"
@@ -223,6 +219,7 @@ export default class ProfileCard extends Component {
                       margin="dense"
                       onChange={(e) => this.setStateName(e)}
                     />
+                    {/* 提示字符仅在修改状态下显示 */}
                     <FormHelperText sx={{ display: this.state.Changeinfo ? "block" : "none" }}>
                       3-32个字符,仅包含英文字母、数字和下划线
                     </FormHelperText>
@@ -258,6 +255,7 @@ export default class ProfileCard extends Component {
                     <InputLabel variant="standard" htmlFor="auth">
                       管理权限
                     </InputLabel>
+                    {/* Select组件用于选择用户权限 */}
                     <Select
                       disabled={!this.state.Changeinfo}
                       variant="standard"

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Grid, Container, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
 import axios from "axios";
+import Api from "../utils/Api";
 import { withParams, withNavigate } from "../utils/RouterTool";
 import RectangleCard from "../components/RectangleCard";
 
@@ -13,7 +14,7 @@ class Searchpage extends React.Component {
 
   handelSort() {
     axios
-      .get("http://127.0.0.1:4523/m1/1221635-0-default/games", {
+      .get(Api(`/games`), {
         params: {
           search: this.props.params.searchParams,
           key: this.state.key,
@@ -45,7 +46,7 @@ class Searchpage extends React.Component {
 
   componentDidMount() {
     axios
-      .get("http://127.0.0.1:4523/m1/1221635-0-default/games", {
+      .get(Api(`/games`), {
         params: { tag_id: this.props.params.searchParams },
       })
       .then(
@@ -64,6 +65,7 @@ class Searchpage extends React.Component {
       <Container component="main" maxWidth="md">
         <Grid container sx={{ mt: 10 }}>
           <Grid xs={6}>
+            {/* 用于排列搜索结果 */}
             <ToggleButtonGroup exclusive aria-label="SortBy" size="small">
               <ToggleButton
                 value="rate"
@@ -99,7 +101,6 @@ class Searchpage extends React.Component {
         <Grid container spacing={2} sx={{ mt: 0.5 }}>
           {games.map((gamesObj) => (
             <RectangleCard gamesObj={gamesObj} />
-            // <SquareCard gamesObj={gamesObj} />
           ))}
         </Grid>
       </Container>

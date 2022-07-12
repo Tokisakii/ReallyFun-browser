@@ -29,16 +29,12 @@ export default class ProfileCard extends Component {
       Delete: false, // 是否进行删除操作
       id: "",
       name: "",
-      // newname: "",
       email: "",
       avatar: "",
-      // newavatar: "",
       auth: "",
-      // newauth: "",
       oldpassword: "",
       newpassword: "",
       open: false, // 消息栏的弹出
-      // showPassword: false,
     };
   }
 
@@ -63,8 +59,7 @@ export default class ProfileCard extends Component {
   }
 
   handleChangeInfo() {
-    const temp = this.state.Changeinfo;
-    this.setState({ Changeinfo: !temp });
+    this.setState({ Changeinfo: true });
   }
 
   handleChangeDelete() {
@@ -73,8 +68,7 @@ export default class ProfileCard extends Component {
   }
 
   handleChangePassword() {
-    const temp = this.state.Changepassword;
-    this.setState({ Changepassword: !temp });
+    this.setState({ Changepassword: true });
   }
 
   setStateOldPassword(e) {
@@ -123,28 +117,61 @@ export default class ProfileCard extends Component {
       });
   }
 
-  // handleUpdateName() {
-  //   axios
-  //     .post(Api(`/user/name`), {
-  //       name: this.state.name,
-  //     })
-  //     .then((response) => {
-  //       if (response.data.code === 0) {
-  //         console.log(response.data);
-  //         const temp = this.state.name;
-  //         this.setState({
-  //           name: temp,
-  //         });
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
+  handleUpdateName() {
+    axios
+      .patch(Api(`/user/name`), {
+        params: {
+          name: this.state.name,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  handleUpdateAuth() {
+    axios
+      .patch(Api(`/user/auth`), {
+        params: {
+          auth: this.state.auth,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  handleUpdatePassword() {
+    axios
+      .patch(Api(`/user/password`), {
+        params: {
+          old_password: this.state.oldpassword,
+          new_password: this.state.newpassword,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   handleSubmit() {
-    // this.handleUpdateName();
-    this.handleUploadAvatar();
+    if (this.state.Changeinfo === true) {
+      this.handleUpdateName();
+      this.handleUploadAvatar();
+      this.handleUpdateAuth();
+    }
+    if (this.state.Changepassword === true) {
+      this.handleUpdatePassword();
+    }
     this.setState({ Changeinfo: false, Changepassword: false });
   }
 
@@ -168,6 +195,7 @@ export default class ProfileCard extends Component {
       <Card>
         <Grid container>
           <Grid item xs={4}>
+            {/* 卡片媒体为用户头像 */}
             <CardMedia
               component="img"
               height="250"
@@ -181,15 +209,17 @@ export default class ProfileCard extends Component {
               <CardContent>
                 <Grid container>
                   <Grid item xs={6}>
+                    {/* 用于输入用户名 */}
                     <TextField
                       disabled={!this.state.Changeinfo}
-                      id="name"
+                      id="username"
                       label="用户名"
                       value={this.state.name}
                       variant="standard"
                       margin="dense"
                       onChange={(e) => this.setStateName(e)}
                     />
+                    {/* 提示字符仅在修改状态下显示 */}
                     <FormHelperText sx={{ display: this.state.Changeinfo ? "block" : "none" }}>
                       3-32个字符,仅包含英文字母、数字和下划线
                     </FormHelperText>
@@ -225,6 +255,7 @@ export default class ProfileCard extends Component {
                     <InputLabel variant="standard" htmlFor="auth">
                       管理权限
                     </InputLabel>
+                    {/* Select组件用于选择用户权限 */}
                     <Select
                       disabled={!this.state.Changeinfo}
                       variant="standard"
@@ -295,7 +326,6 @@ export default class ProfileCard extends Component {
                 onClick={() => this.handleSubmit()}
                 color="success"
                 variant="contained"
-                // disabled={this.state.Readonly}
                 sx={{
                   display: this.state.Changeinfo || this.state.Changepassword ? "block" : "none",
                 }}

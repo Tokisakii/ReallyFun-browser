@@ -7,6 +7,7 @@ import RectangleCard from "../components/RectangleCard";
 
 const cookies = new Cookies();
 
+// 收藏页面，用于展示用户收藏的游戏
 export default class Collection extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +16,7 @@ export default class Collection extends Component {
     };
   }
 
+  // 初始化获取用户收藏的游戏
   componentDidMount() {
     axios
       .get(Api(`/favorites`), {
@@ -38,7 +40,7 @@ export default class Collection extends Component {
       <Container maxWidth="md" component="main">
         <Grid container sx={{ mt: 10 }} spacing={2}>
           {this.state.games.map((gamesObj) => (
-            // <RectangleCard gamesObj={gamesObj} />
+            // 使用长方形游戏卡片进行展示
             <RectangleCard gamesObj={gamesObj} />
           ))}
         </Grid>

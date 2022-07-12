@@ -30,7 +30,7 @@ const pages = [
 ];
 const settings = [
   { label: "个人空间", to: "/profile" },
-  { label: "处理反馈", to: "/handlefeedback" },
+  { label: "管理面板", to: "/admin" },
   { label: "我的收藏", to: "/collection" },
   { label: "游玩历史", to: "/history" },
   { label: "上传游戏", to: "/upload" },

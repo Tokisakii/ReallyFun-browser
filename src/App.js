@@ -67,7 +67,7 @@ function App() {
         <Route path="/login" element={<LogIn navigate={navigate} onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/searchPage/:searchParams" element={<Searchpage />} />
-        <Route path="/handlefeedback" element={<HandleFeedback />} />
+        <Route path="/admin" element={<HandleFeedback />} />
       </Routes>
       <Copyright sx={{ md: 4 }} />
     </Container>

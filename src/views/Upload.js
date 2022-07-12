@@ -4,6 +4,7 @@ import { Container, Grid, Typography } from "@mui/material";
 import axios from "axios";
 import Api from "../utils/Api";
 import RectangleCard from "../components/RectangleCard";
+import GameInfoCard from "../components/GameInfoCard";
 
 const cookies = new Cookies();
 
@@ -17,7 +18,7 @@ export default class Upload extends Component {
 
   componentDidMount() {
     axios
-      .get(Api(`/favorites`), {
+      .get(Api(`/games`), {
         params: {
           user_id: cookies.get("uid"),
         },
@@ -40,6 +41,7 @@ export default class Upload extends Component {
           <Typography component="div" variant="h5">
             上传游戏
           </Typography>
+          <GameInfoCard create={1} />
         </Grid>
         <Grid item xs={12}>
           <Typography component="div" variant="h5">
@@ -49,7 +51,7 @@ export default class Upload extends Component {
         <Grid container spacing={2}>
           {this.state.games.map((gamesObj) => (
             // <RectangleCard gamesObj={gamesObj} />
-            <RectangleCard gamesObj={gamesObj} />
+            <GameInfoCard gamesObj={gamesObj} create={0} />
           ))}
         </Grid>
       </Container>

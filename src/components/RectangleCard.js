@@ -49,14 +49,14 @@ export default class RectangleCard extends React.Component {
                         {gamesObj.intro}
                       </Typography>
                     </Grid>
-                    <Grid item xs={8}>
+                    {/* <Grid item xs={8}>
                       <Stack direction="row" spacing={1}>
                         {gamesObj.tags.map((tags) => (
                           // <RectangleCard gamesObj={gamesObj} />
                           <Chip label={tags.content} />
                         ))}
                       </Stack>
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={4}>
                       <Stack direction="row">
                         <Reating2show value={gamesObj.rating / 2} />
